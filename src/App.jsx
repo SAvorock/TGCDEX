@@ -1,34 +1,35 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css'
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+function App(){
+  return(
+    <div className='container'>
+      <header className='cabecario'>
+        <div className='logo'>
+          <h1>TGC DEX</h1>
+        </div>
+      </header>
+      <main className='cartas-layout'>
+        <div className='area-carta' id='areacarta'>
+          <div className='carta-post' id='cartapost'>
+            <p>Lugar da Carta</p>
+          </div>
+          <img className='carta-img' id='cartaimg' alt='pokecarta'/>
+        </div>
+        <div className='procurar-carta'>
+          <div className='pesquisar-carta'>
+            <input type='text' className='form-control me-2' id='procurarcarta' placeholder='Digite a carta que você procura'/>
+            <button className='btn-primary' id='butaocarta'>Pesquisar</button>
+          </div>
+          <div className='carta-info' id='cartainfo'>
+            <div className='carta-informacao' id='cartainformacao'>
+              <p>Informaçoes</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
   )
 }
 
