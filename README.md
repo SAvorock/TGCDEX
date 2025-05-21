@@ -10,3 +10,9 @@
 
  # 2º COMMIT
  Criação e organização de arquivos... import bootstrap e layout
+
+ # 3º COMMIT
+ Finalização da Dashboard e estilização
+
+ # 4º COMMIT
+ Criação da aba de pesquisa com resultado de sucesso ou invalido de acordo com ID 
