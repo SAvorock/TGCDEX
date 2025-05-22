@@ -25,6 +25,7 @@ body{
   border-right: 2px solid rgb(0, 0, 0);
   border-bottom: 2px solid rgb(0, 0, 0);
   border-left: 2px solid rgb(0, 0, 0);
+  padding-top: 50px;
 }
 
 .procurar-carta{
@@ -52,4 +53,8 @@ body{
 .carta-info{
   height: 200px;
   padding: 15px;
+}
+
+.carta-img{
+  max-height: 400px;  
 }

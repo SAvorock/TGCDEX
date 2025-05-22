@@ -7,6 +7,7 @@ function App(){
   
   const [cardId, setCardId] = useState('');
   const [message, setMessage] = useState('');
+  const [pokemoncard, setpokemoncard] = useState('');
   const [loading, setLoading] = useState(false);
 
   const apiKey =import.meta.env.VITE_POKEMON_API_KEY;
@@ -18,9 +19,11 @@ function App(){
     }
     setLoading(true);
     setMessage('');
+    setpokemoncard(null);
     
     try{
-      await PokemonTCG.card.find(cardId, {apiKey});
+      const infoCard = await PokemonTCG.card.find(cardId, {apiKey});
+      setpokemoncard(infoCard);
       setMessage(`Carta com ID ${cardId}  Sucesso!`);
     } catch (error) {
       setMessage(`Carta com ID ${cardId} Invalido`);
@@ -39,9 +42,9 @@ function App(){
       <main className='cartas-layout'>
         <div className='area-carta' id='areacarta'>
           <div className='carta-post' id='cartapost'>
-            <p>Lugar da Carta</p>
+            {pokemoncard && (<img src={pokemoncard.images.large}
+          className='carta-img' id='cartaimg' alt={pokemoncard.name}/>)}
           </div>
-          <img className='carta-img' id='cartaimg' alt='pokecarta'/>
         </div>
         <div className='procurar-carta'>
           <div className='pesquisar-carta'>
@@ -50,9 +53,11 @@ function App(){
             <button className='btn-primary' id='butaocarta' onClick={searchCard} disabled={loading}>{loading ? 'Buscando...':'Pesquisar'}</button>
           </div>
           {message && <p>{message}</p>}
+          
           <div className='carta-info' id='cartainfo'>
             <div className='carta-informacao' id='cartainformacao'>
               <p>Infomarções da carta</p>
+             
             </div>
           </div>
         </div>
