@@ -22,3 +22,6 @@
 
  # 6º COMMIT
  Exibição das informações e imagem da carta de acordo com a ID digitada
+
+ # 7º COMMIT
+ Criação do Layout das cartas salvas, indentação do codigo e ajuste do css

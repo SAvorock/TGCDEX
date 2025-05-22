@@ -1,3 +1,10 @@
+ /*Nome do arquivo: README.MD
+ Data de criação: 15/05/2025
+ Autor: Matheus Alencar Cavalcante
+ Matrícula: 01568969
+ */
+
+
 body{
   background-color: rgb(124, 123, 123);
 }
@@ -60,3 +67,10 @@ header{
 .carta-img{
   max-height: 400px;  
 }
+
+.carta-img2{
+  max-width: 150px;
+  padding-left: 12px;
+
+}
+
