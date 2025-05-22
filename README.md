@@ -16,3 +16,9 @@
 
  # 4º COMMIT
  Criação da aba de pesquisa com resultado de sucesso ou invalido de acordo com ID 
+
+ # 5º CONMIT
+ Imagem aparece de acordo com ID digitado
+
+ # 6º COMMIT
+ Exibição das informações e imagem da carta de acordo com a ID digitada

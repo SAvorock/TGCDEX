@@ -56,8 +56,24 @@ function App(){
           
           <div className='carta-info' id='cartainfo'>
             <div className='carta-informacao' id='cartainformacao'>
-              <p>Infomarções da carta</p>
-             
+              <p><strong>Infomarções da carta</strong></p>
+              {pokemoncard &&
+              <ul>
+                <li><strong>NOME: </strong>{pokemoncard.name}</li>
+                <li><strong>ID: </strong>{pokemoncard.id}</li>  
+                <li><strong>HP: </strong>{pokemoncard.hp}</li>
+                <li><strong>TIPO: </strong>{pokemoncard.types}</li>
+                <li><strong>EVOLUÇÔES: </strong>{pokemoncard.evolvesFrom}</li>
+                <li><strong>REGRAS: </strong>{pokemoncard.rules}</li>
+                <li><strong>ATAQUES: </strong>{pokemoncard.attacks.map((attack , index)=> (<ul>
+                  <li key={index}><strong>{attack.name}</strong> - Custo: {attack.cost} {attack.convertedEnergyCost} - Descrição: {attack.text} </li>
+                </ul>))}</li>
+                <li><strong>FRAQUEZAS:</strong>{pokemoncard.weaknesses.map((weaknesse , index)=> (<ul>
+                  <li key={index}><strong></strong>{weaknesse.type} {weaknesse.value}</li>
+                </ul>))}</li>
+                <li><strong>VALOR: </strong> ¨$ {pokemoncard.tcgplayer.prices.holofoil.market}</li>
+              </ul> 
+              }
             </div>
           </div>
         </div>
