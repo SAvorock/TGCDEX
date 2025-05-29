@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PokemonTCG from 'pokemontcgsdk';
 import './style.css'
 
+
 function App() {
 
   const [cardId, setCardId] = useState('');
@@ -16,6 +17,7 @@ function App() {
   const [pokemoncard, setpokemoncard] = useState('');
   const [loading, setLoading] = useState(false);
   const [saves, setSaves] = useState([]);
+  const [pagescard, setpagescard] = useState ([]);
 
 
   const apiKey = import.meta.env.VITE_POKEMON_API_KEY;
@@ -30,47 +32,64 @@ function App() {
     setLoading(true);
     setMessage('');
     setpokemoncard(null);
+    setpagescard([]);
 
-    try {
+    try{
+      try{
 
-      const searchCarta = await PokemonTCG.card.find(cardId, { apiKey });
+        const searchCarta = await PokemonTCG.card.find(cardId, {apiKey});
 
-      // Verificação dos atributos caso não tenha
+        const chekCard = {
+          id: searchCarta.id || 'N/A',
+          name: searchCarta.name || 'N/A',
+          images: {small: searchCarta.images?.small|| '', large: searchCarta.images?.large|| ''},
+          hp: searchCarta.hp || 'N/A',
+          types: searchCarta.types || [],
+          evolvesFrom: searchCarta.evolvesFrom || 'N/A',
+          rules: searchCarta.rules || [],
+          abilities: searchCarta.abilities || [],
+          attacks: searchCarta.attacks || [],
+          weaknesses: searchCarta.weaknesses || [],
+          tcgplayer:{prices: {holofoil: {market: searchCarta.tcgplayer?.prices?.holofoil?.market || 'N/A'}}}
+        };
+        setpokemoncard(chekCard);
+        setMessage(`Carta com ID: ${cardId} econtrada.`);
+        setLoading(false);
+        return;
+      } catch (error){
+        
+        const cardpage = await PokemonTCG.card.where({q: `name:${cardId}`,pageSize:5,apiKey});
 
-      const chekCard = {
-        id: searchCarta.id || 'N/A',
-        name: searchCarta.name || 'Nome desconhecido',
-        images: {
-          small: searchCarta.images?.small || '/pokebola.svg',
-          large: searchCarta.images?.large || '/pokebola.svg'
-        },
-        hp: searchCarta.hp || 'N/A',
-        types: searchCarta.types || [],
-        evolvesFrom: searchCarta.evolvesFrom || 'Nenhuma',
-        rules: searchCarta.rules || [],
-        abilities: searchCarta.abilities || [],
-        attacks: searchCarta.attacks || [],
-        weaknesses: searchCarta.weaknesses || [],
-        tcgplayer: {
-          prices: {
-            holofoil: {
-              market: searchCarta.tcgplayer?.prices?.holofoil?.market || 'N/A'
-            }
-          }
+        if (cardpage.data.length === 0){
+
+          setMessage(`Carta ${cardId} não encontrada.`);
+          return;
+
         }
-      };
 
-      // Carta encontrada e mostra mensagem de sucesso
-
-      setpokemoncard(chekCard);
-      setMessage(`Carta com ID ${cardId}  Sucesso!`);
-    } catch (error) {
-      setMessage(`Carta com ID ${cardId} Invalido`);
-      console.error('Erro');
+        setpagescard(cardpage.data);
+        setMessage(`Cartas encontradas: ${cardpage.data.length} com o nome: ${cardId}`);
+      }
+    } catch (error){
+      setMessage(`Erro na busca`);
+      console.error(error);
     } finally {
       setLoading(false);
     }
-  };
+    
+    }
+  
+  PokemonTCG.card.where({ q: `name:${cardId}` })
+  .then(result => {
+    console.log(result.data[0].name);
+  });
+
+  PokemonTCG.card.all({ q: `name:${cardId}` })
+    .then((cards) => {
+        console.log(cards[0].name) // "Blastoise"
+    });
+    
+   // "Blastoise"
 
   // Verifica se a carta já foi salva antes
   const salvarCard = () => {
@@ -156,6 +175,20 @@ function App() {
               }
 
             </div>
+          </div>
+        </div>
+        <div className='paginas-cartas' id='paginascartas'>
+          <h2>Escolha sua carta:</h2>
+          <div className='row-cols2'>
+            {pagescard.map((card) => (
+              <div key={cardId} className='card-folk' >
+                <div className='escolha-carta' onClick={() => selectCard(card)}>
+                  <img src={card.images.small} className='cards-buscas' alt={card.name} onError={(e) => {
+                    e.target.src = `Erro`;
+                  }}/>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </main>

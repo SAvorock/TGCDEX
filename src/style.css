@@ -74,3 +74,20 @@ header{
 
 }
 
+.row-cols2{
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+
+}
+
+.cards-buscas{
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+
+}
+
+

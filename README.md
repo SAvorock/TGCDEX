@@ -25,3 +25,16 @@
 
  # 7º COMMIT
  Criação do Layout das cartas salvas, indentação do codigo e ajuste do css
+
+ # 8º COMMIT
+ Buscar por nomes (console e no layout), correção de bugs e organização do estilo css
+
+
+ # IMAGENS DO PROJETO
+
+![Imagem por nome](./public/Buscar_por_nome.jpg)
+
+![Imagem por ID](./public/Pesquisa_por_id.jpg)
+
+![IMagem carta salva](./public/Busca_com_carta_salva.jpg)
+ 
